@@ -28,13 +28,4 @@
     实例，这两个实例分别在类级别和方法级别处理。而annotation-driven配置帮助我们自动完成上述两个实例的注入。-->
     <mvc:annotation-driven/>
 
-    <!-- 视图解析器 -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          id="internalResourceViewResolver">
-        <!-- 前缀 -->
-        <property name="prefix" value="/WEB-INF/view/"/>
-        <!-- 后缀 -->
-        <property name="suffix" value=".jsp"/>
-    </bean>
-
 </beans>

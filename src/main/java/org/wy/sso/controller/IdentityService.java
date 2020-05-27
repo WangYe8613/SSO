@@ -1,9 +1,11 @@
 package org.wy.sso.controller;
 
+import org.wy.sso.model.Response;
+
 import java.sql.SQLException;
 
 public interface IdentityService {
-    void signIn(String name, String passwd) throws SQLException;
+    Response signIn(String name, String passwd) throws SQLException;
 
-    void register(String name, String passwd) throws SQLException;
+    Response register(String name, String passwd) throws SQLException;
 }
