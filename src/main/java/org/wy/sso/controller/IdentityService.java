@@ -1,7 +1,9 @@
 package org.wy.sso.controller;
 
-public interface IdentityService {
-    void signIn(String name, String passwd);
+import java.sql.SQLException;
 
-    void register(String name, String passwd);
+public interface IdentityService {
+    void signIn(String name, String passwd) throws SQLException;
+
+    void register(String name, String passwd) throws SQLException;
 }

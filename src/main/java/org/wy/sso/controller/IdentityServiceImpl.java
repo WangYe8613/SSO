@@ -26,13 +26,13 @@ public class IdentityServiceImpl implements IdentityService {
 
     @Override
     @RequestMapping(value = "/signIn")
-    public void signIn(@RequestParam(value = "name") String name, @RequestParam(value = "passwd") String passwd) {
+    public void signIn(@RequestParam(value = "name") String name, @RequestParam(value = "passwd") String passwd) throws SQLException {
 
     }
 
     @Override
     @RequestMapping(value = "/register")
-    public void register(@RequestParam(value = "name") String name, @RequestParam(value = "passwd") String passwd) {
+    public void register(@RequestParam(value = "name") String name, @RequestParam(value = "passwd") String passwd) throws SQLException {
 
         if (name == null || passwd == null) {
             logger.error("name or passwd could not be null");
@@ -56,7 +56,7 @@ public class IdentityServiceImpl implements IdentityService {
                 execute();
     }
 
-    public Boolean isExist(String name) {
+    public Boolean isExist(String name) throws SQLException {
         String sql = "select uuid from UserEO where name = ?";
         ResultSet res = psf.createPreparedStatement(sql).setParams(1, name).executeQuery();
         try {

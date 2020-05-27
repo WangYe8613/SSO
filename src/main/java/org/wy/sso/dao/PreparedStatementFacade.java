@@ -16,49 +16,29 @@ public class PreparedStatementFacade {
     private PreparedStatement ps;
 
     @Autowired
-    public PreparedStatementFacade(DataSource ds) {
-        try {
-            this.conn = ds.getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public PreparedStatementFacade(DataSource ds) throws SQLException {
+        this.conn = ds.getConnection();
     }
 
-    public PreparedStatementFacade createPreparedStatement(String sql) {
-        try {
-            this.ps = conn.prepareStatement(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public PreparedStatementFacade createPreparedStatement(String sql) throws SQLException {
+        this.ps = conn.prepareStatement(sql);
         return this;
     }
 
-    public PreparedStatementFacade setParams(int index, String param) {
-        try {
-            this.ps.setObject(index, param);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public PreparedStatementFacade setParams(int index, String param) throws SQLException {
+        this.ps.setObject(index, param);
         return this;
     }
 
-    public ResultSet executeQuery() {
+    public ResultSet executeQuery() throws SQLException {
         ResultSet resultSet = null;
-        try {
-            resultSet = this.ps.executeQuery();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        resultSet = this.ps.executeQuery();
         return resultSet;
     }
 
-    public Boolean execute() {
+    public Boolean execute() throws SQLException {
         Boolean resultSet = null;
-        try {
-            resultSet = this.ps.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        resultSet = this.ps.execute();
         return resultSet;
     }
 }
