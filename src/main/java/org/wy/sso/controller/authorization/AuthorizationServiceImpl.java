@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.wy.sso.common.AuthTokenTool.Token;
-import org.wy.sso.common.TimeTool.MyTime;
-import org.wy.sso.logger.LogUtil;
 import org.wy.sso.model.authorization.AuthorizationValidateInventory;
 import org.wy.sso.model.response.Response;
 

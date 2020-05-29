@@ -8,5 +8,7 @@ import java.sql.SQLException;
 public interface IdentityService {
     Response signIn(String name, String passwd) throws SQLException, UnsupportedEncodingException;
 
+    Response signOut(String token) throws SQLException, UnsupportedEncodingException;
+
     Response register(String name, String passwd) throws SQLException;
 }

@@ -65,6 +65,15 @@ public class IdentityServiceImpl implements IdentityService {
     }
 
     @Override
+    @RequestMapping(value = "/signOut")
+    @ResponseBody
+    @CrossOrigin
+    public Response signOut(@RequestParam(value = "authToken") String token) {
+        T.removeToken(token);
+        return new Response();
+    }
+
+    @Override
     @RequestMapping(value = "/register")
     @ResponseBody
     @CrossOrigin

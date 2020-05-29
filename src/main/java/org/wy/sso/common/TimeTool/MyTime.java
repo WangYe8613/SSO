@@ -2,7 +2,6 @@ package org.wy.sso.common.TimeTool;
 
 import org.springframework.stereotype.Component;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

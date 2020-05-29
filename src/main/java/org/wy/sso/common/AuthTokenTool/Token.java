@@ -10,9 +10,6 @@ import org.wy.sso.logger.LogUtil;
 import org.wy.sso.model.authorization.TokenCache;
 
 import java.io.UnsupportedEncodingException;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Component(value = "GenerateTokenTool")
 @PropertySource("classpath:token.properties")
@@ -35,13 +32,14 @@ public class Token {
 
     /**
      * 校验该token是否存在，并且是否过期
+     *
      * @param token
      * @return
      */
     public Boolean checkToken(String token) {
         Long currentTime = time.currentTime();
         Long expiredTime = tokenCache.get(token);
-        if(expiredTime == null || expiredTime < currentTime){
+        if (expiredTime == null || expiredTime < currentTime) {
             return false;
         }
         return true;
@@ -49,6 +47,7 @@ public class Token {
 
     /**
      * 生成token，并加入缓存中
+     *
      * @param userName
      * @return
      * @throws UnsupportedEncodingException
@@ -64,5 +63,14 @@ public class Token {
         long expiredTime = time.currentTime() + tokenLifeCycle;
         tokenCache.add(token, expiredTime);
         return token;
+    }
+
+    /**
+     * 从缓存中去除指定token
+     *
+     * @param token
+     */
+    public void removeToken(String token) {
+        tokenCache.remove(token);
     }
 }
