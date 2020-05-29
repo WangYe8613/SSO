@@ -1,4 +1,7 @@
-package org.wy.sso.model;
+package org.wy.sso.model.identity;
+
+import org.wy.sso.model.Inventory;
+import org.wy.sso.model.po.UserEO;
 
 public class SignInInventory implements Inventory {
 

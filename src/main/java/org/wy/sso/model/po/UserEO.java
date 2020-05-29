@@ -1,4 +1,4 @@
-package org.wy.sso.model;
+package org.wy.sso.model.po;
 
 import java.sql.Timestamp;
 

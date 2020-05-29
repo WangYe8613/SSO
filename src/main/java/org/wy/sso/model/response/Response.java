@@ -1,4 +1,6 @@
-package org.wy.sso.model;
+package org.wy.sso.model.response;
+
+import org.wy.sso.model.Inventory;
 
 public class Response {
     private Inventory inventory;

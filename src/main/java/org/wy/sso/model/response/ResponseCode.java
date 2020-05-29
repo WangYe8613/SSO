@@ -1,4 +1,4 @@
-package org.wy.sso.model;
+package org.wy.sso.model.response;
 
 /**
  *返回参数错误码枚举
