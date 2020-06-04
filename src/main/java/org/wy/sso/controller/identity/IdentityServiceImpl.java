@@ -20,6 +20,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
+import static org.wy.sso.model.response.ResponseCode.SUCCESS;
+
 @Controller(value = "IdentityService")
 @RequestMapping(value = "/identity")
 public class IdentityServiceImpl implements IdentityService {
@@ -69,8 +71,10 @@ public class IdentityServiceImpl implements IdentityService {
     @ResponseBody
     @CrossOrigin
     public Response signOut(@RequestParam(value = "authToken") String token) {
+        Response response = new Response();
         T.removeToken(token);
-        return new Response();
+        response.setCode(SUCCESS);
+        return response;
     }
 
     @Override
