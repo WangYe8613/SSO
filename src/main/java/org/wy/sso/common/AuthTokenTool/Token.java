@@ -8,6 +8,7 @@ import org.wy.sso.common.CypherTool.Base64;
 import org.wy.sso.common.TimeTool.MyTime;
 import org.wy.sso.logger.LogUtil;
 import org.wy.sso.model.authorization.TokenCache;
+import org.wy.sso.model.authorization.TokenInfo;
 
 import java.io.UnsupportedEncodingException;
 
@@ -38,8 +39,8 @@ public class Token {
      */
     public Boolean checkToken(String token) {
         Long currentTime = time.currentTime();
-        Long expiredTime = tokenCache.get(token);
-        if (expiredTime == null || expiredTime < currentTime) {
+        TokenInfo tokenInfo = tokenCache.get(token);
+        if (tokenInfo == null || tokenInfo.getExpiredTime() < currentTime) {
             return false;
         }
         return true;
@@ -47,12 +48,20 @@ public class Token {
 
     /**
      * 生成token，并加入缓存中
+     * 如果同一个用户在多个地方登录，则保留最新的token，删除上一次登录的token
      *
      * @param userName
      * @return
      * @throws UnsupportedEncodingException
      */
-    public String generateToken(String userName) throws UnsupportedEncodingException {
+    public String generateToken(String userUuid, String userName) throws UnsupportedEncodingException {
+
+        // 如果同一个用户在多个地方登录，则保留最新的token，删除上一次登录的token
+        // 这样就可以实现异地登录退出上一个账号的功能
+        String lastToken = tokenCache.getTokenByUserUuid(userUuid);
+        if (lastToken != null) {
+            tokenCache.remove(lastToken);
+        }
 
         String currentDate = time.currentDate("yyyy-MM-dd HH:mm:ss");
         String token = base64.getBase64(userName + currentDate);
@@ -61,7 +70,7 @@ public class Token {
             logger.error("generate token faild!!!");
         }
         long expiredTime = time.currentTime() + tokenLifeCycle;
-        tokenCache.add(token, expiredTime);
+        tokenCache.add(token, userUuid, expiredTime);
         return token;
     }
 

@@ -57,7 +57,7 @@ public class IdentityServiceImpl implements IdentityService {
         }
 
         // 将登录的用户token缓存起来
-        String token = T.generateToken(userEO.getName());
+        String token = T.generateToken(userEO.getUuid(), userEO.getName());
 
         SignInInventory inventory = new SignInInventory();
         inventory.valueOf(userEO);
